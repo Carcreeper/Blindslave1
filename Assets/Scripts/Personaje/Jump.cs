@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Jump : MonoBehaviour
@@ -9,7 +10,7 @@ public class Jump : MonoBehaviour
     [SerializeField] float checkRadius;
 
     private Rigidbody2D rb;
-    private bool isGrounded;
+    [SerializeField] private bool isGrounded;
     private bool canDoubleJump;
 
     void Start()
@@ -27,14 +28,33 @@ public class Jump : MonoBehaviour
         { 
         
             canDoubleJump = true;
+            Debug.Log("isgrounded");
         
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
-            
-            rb.linearVelocity = new Vector2(rb.linearVelocityX, rb.linearVelocityY + jumpForce );
+
+            rb.linearVelocity = new Vector2(rb.linearVelocityX, rb.linearVelocityY + jumpForce);
 
         }
+        else if (Input.GetKeyDown(KeyCode.Space)&& canDoubleJump && !isGrounded) 
+        { 
+        
+            rb.linearVelocity= new Vector2(rb.linearVelocityX,doubleJumpForce);
+            canDoubleJump= false;
+            
+        }
+
+
+
+    }
+        //gizmovisual
+        
+    void OnDrawGizmos() { 
+        
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(groundCheck.position, checkRadius);
+            
     }
 }

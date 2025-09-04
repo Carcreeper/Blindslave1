@@ -13,11 +13,11 @@ public class Movement : MonoBehaviour
     }
     void Update()
     {
-        movent.x = Input.GetAxis("Horizontal");       
+        movent.x = Input.GetAxisRaw("Horizontal");       
     }
 
     void FixedUpdate()
     {
-        rb.MovePosition(rb.position + movent * SpeedForce * Time.fixedDeltaTime);    
+        rb.linearVelocity=(rb.linearVelocity + movent * SpeedForce/10f);    
     }
 }

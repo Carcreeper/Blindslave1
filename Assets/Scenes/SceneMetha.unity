@@ -260,7 +260,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e21fc9555cac7d429d628cbf3c62f99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpeedForce: 3
+  SpeedForce: 1.5
+  inpM:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Inp M
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: b852ef5d-f49f-4069-839d-b485e9b374a6
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: -1680190386980627800, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
 --- !u!50 &471960745
 Rigidbody2D:
   serializedVersion: 5

@@ -41,7 +41,7 @@ public class EnemyController : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             Vector2 direccionDaño = new Vector2(transform.position.x, 5);
-            collision.gameObject.GetComponent<Movement>().RecibeDaño(direccionDaño, 1);
+            //collision.gameObject.GetComponent<Movement>().RecibeDaño(direccionDaño, 1);
 
         }
     }

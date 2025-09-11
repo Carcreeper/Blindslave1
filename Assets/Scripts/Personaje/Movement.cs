@@ -31,7 +31,7 @@ public class Movement : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.linearVelocity=(rb.linearVelocity + movent * SpeedForce);    
+        rb.linearVelocity=(rb.linearVelocity.y * Vector2.up + movent * SpeedForce);    
     }
 
     //DAÑO

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 599475706710451414}
   - component: {fileID: 4846003274634963441}
   - component: {fileID: 1348659346251773267}
+  - component: {fileID: 2154146450247863522}
   m_Layer: 0
   m_Name: Personaje
   m_TagString: Untagged
@@ -201,6 +202,22 @@ MonoBehaviour:
   groundCheck: {fileID: 3214951356980807572}
   checkRadius: 0.09
   isGrounded: 0
+--- !u!114 &2154146450247863522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5518377817945817240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75966944652442741b199a0629545fba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 10
+  maxHealth: 10
+  movement: {fileID: 4846003274634963441}
+  isDeath: 0
 --- !u!1 &7559868168113946694
 GameObject:
   m_ObjectHideFlags: 0

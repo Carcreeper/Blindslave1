@@ -6,6 +6,12 @@ public class Health : MonoBehaviour
     public float maxHealth;
     public Movement movement;
     public bool isDeath;
+
+    [ContextMenu("Causar daño")]
+    public void TestDamage()
+    {
+        TakeDamage(1);
+    }
     public void TakeDamage(float c)
     {
         health -= c;
@@ -16,10 +22,9 @@ public class Health : MonoBehaviour
 
         if (movement != null)
         {
-            //movement.Dagame()
+            movement.Damage();
         }
     }
-
     public void Death ()
     {
  

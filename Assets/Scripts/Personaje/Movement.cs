@@ -28,6 +28,8 @@ public class Movement : MonoBehaviour
     }
     public void Damage()
     {
+        Vector2 rebote = new Vector2(transform.position.x - Vector2.right.x, 1).normalized;
+        rb.AddForce(rebote * 6, ForceMode2D.Impulse);
         Debug.Log("activé el daño en el movimiento");
     }
 }

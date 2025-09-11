@@ -26,4 +26,8 @@ public class Movement : MonoBehaviour
     {
         rb.linearVelocity=(rb.linearVelocity.y * Vector2.up + movent * SpeedForce);    
     }
+    public void Damage()
+    {
+
+    }
 }

@@ -28,6 +28,6 @@ public class Movement : MonoBehaviour
     }
     public void Damage()
     {
-        Debug.Log("activé el daño en el movimiento");
+        Debug.Log("activé el daño en el ");
     }
 }

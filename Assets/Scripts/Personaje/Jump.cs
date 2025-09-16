@@ -38,7 +38,7 @@ public class Jump : MonoBehaviour
         { 
         
             canDoubleJump = true;
-            Debug.Log("isgrounded");
+            
         
         }
 
@@ -58,7 +58,9 @@ public class Jump : MonoBehaviour
             rb.linearVelocity = new Vector2(rb.linearVelocityX, jumpForce);
 
         }
-        else if (canDoubleJump && !isGrounded)
+        else if (
+            
+            canDoubleJump && !isGrounded)
         {
 
             rb.linearVelocity = new Vector2(rb.linearVelocityX, doubleJumpForce);

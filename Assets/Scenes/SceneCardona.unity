@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 683271640}
   - component: {fileID: 683271639}
   m_Layer: 3
-  m_Name: Square
+  m_Name: Terreno
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -252,6 +252,37 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &754065900
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 754065901}
+  m_Layer: 0
+  m_Name: AttackCheaker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &754065901
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 754065900}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.22, y: 0.2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1134725959}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &897769475
 GameObject:
@@ -403,8 +434,9 @@ GameObject:
   - component: {fileID: 1134725957}
   - component: {fileID: 1134725961}
   - component: {fileID: 1134725960}
+  - component: {fileID: 1134725962}
   m_Layer: 0
-  m_Name: Square (1)
+  m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -492,7 +524,8 @@ Transform:
   m_LocalPosition: {x: 5.68, y: -0.58, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 754065901}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1134725960
@@ -568,6 +601,37 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &1134725962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1134725956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db2012b15504fb146864e3597fdbba06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackForce: 2
+  attackDelay: 1
+  attackRange: 0.5
+  attackPivot: {fileID: 754065901}
+  atk:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Atk
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: a5652c36-3c26-4a8e-887d-2eb4214692d4
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!4 &2027367289 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2644985130572564066, guid: 573c3793baa20cf45a761a2bea12fc92, type: 3}
@@ -581,6 +645,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1348659346251773267, guid: 573c3793baa20cf45a761a2bea12fc92, type: 3}
+      propertyPath: jumpAction.m_Action.m_Name
+      value: Jump
+      objectReference: {fileID: 0}
     - target: {fileID: 2644985130572564066, guid: 573c3793baa20cf45a761a2bea12fc92, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.067

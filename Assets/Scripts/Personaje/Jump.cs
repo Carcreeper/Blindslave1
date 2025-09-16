@@ -1,5 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Jump : MonoBehaviour
 {
@@ -8,14 +9,23 @@ public class Jump : MonoBehaviour
     [SerializeField] LayerMask groundLayer;
     [SerializeField] Transform groundCheck;
     [SerializeField] float checkRadius;
+    public InputActionProperty jumpAction;
 
     private Rigidbody2D rb;
     [SerializeField] private bool isGrounded;
     private bool canDoubleJump;
 
+    private void Awake()
+    {
+
+        jumpAction.action.Enable();
+        rb = GetComponent<Rigidbody2D>();
+        jumpAction.action.performed += JumpMethod;
+    }
+
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+
     }
 
     
@@ -32,24 +42,31 @@ public class Jump : MonoBehaviour
         
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
-        {
-
-            rb.linearVelocity = new Vector2(rb.linearVelocityX, rb.linearVelocityY + jumpForce);
-
-        }
-        else if (Input.GetKeyDown(KeyCode.Space)&& canDoubleJump && !isGrounded) 
-        { 
-        
-            rb.linearVelocity= new Vector2(rb.linearVelocityX,doubleJumpForce);
-            canDoubleJump= false;
-            
-        }
+       
 
 
 
     }
-        //gizmovisual
+    //gizmovisual
+
+    public void JumpMethod(InputAction.CallbackContext cnt)
+    {
+
+        if (isGrounded)
+        {
+
+            rb.linearVelocity = new Vector2(rb.linearVelocityX, jumpForce);
+
+        }
+        else if (canDoubleJump && !isGrounded)
+        {
+
+            rb.linearVelocity = new Vector2(rb.linearVelocityX, doubleJumpForce);
+            canDoubleJump = false;
+
+        }
+
+    }
         
     void OnDrawGizmos() { 
         

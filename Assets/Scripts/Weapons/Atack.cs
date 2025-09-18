@@ -8,9 +8,11 @@ public class Atack : MonoBehaviour
     public float attackDelay;
     public float attackRange;
     public Transform attackPivot;
+    public Transform attackPivotUp;
     public InputActionProperty atk;
     public LayerMask enemyLayer;
     private bool isAttacking;
+    public Movement movement;
 
     private void Awake()
     {
@@ -29,7 +31,13 @@ public class Atack : MonoBehaviour
         Debug.Log("estoyatacando");
         isAttacking = true;
         yield return new WaitForSeconds(attackDelay);
+
         Vector2 attackPoint = new Vector2(attackPivot.position.x, attackPivot.position.y);
+        if (movement.movent.y > 0)
+        {
+            attackPoint = new Vector2(attackPivotUp.position.x, attackPivotUp.position.y);
+        }
+
         Collider2D c2d = Physics2D.OverlapCircle(attackPoint, attackRange, enemyLayer);
         if (c2d != null)
         {
@@ -40,7 +48,8 @@ public class Atack : MonoBehaviour
             }
             yield return new WaitForSeconds(attackDelay);
         }
-        isAttacking=false;
+
+        isAttacking =false;
     }
 
     public void AttackMethod(InputAction.CallbackContext cnt) 
@@ -58,6 +67,7 @@ public class Atack : MonoBehaviour
         Gizmos.color = Color.yellow;
         if (!isAttacking) Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(attackPivot.position, attackRange);
+        Gizmos.DrawWireSphere(attackPivotUp.position, attackRange);
 
     }
 }

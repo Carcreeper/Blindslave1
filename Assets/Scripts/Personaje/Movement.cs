@@ -1,12 +1,14 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Jobs;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Movement : MonoBehaviour
 {
     [SerializeField]public float SpeedForce;
     private Rigidbody2D rb;
-    private Vector2 movent;
+    public Vector2 movent;
     public InputActionProperty inpM;
+    public Transform graphics;
 
     private void Awake()
     {
@@ -18,13 +20,23 @@ public class Movement : MonoBehaviour
     }
     void Update()
     {
-        movent=inpM.action.ReadValue<Vector2>();    
-        //movent.x = Input.GetAxisRaw("Horizontal");       
+        movent=inpM.action.ReadValue<Vector2>();
+        //movent.x = Input.GetAxisRaw("Horizontal");
+        if (movent.x>0)
+        {
+            graphics.localScale = Vector3.one;
+        }
+        else if(movent.x < 0)
+        {
+            graphics.localScale = new Vector3(-1,1,1);
+        }
     }
 
     void FixedUpdate()
     {
-        rb.linearVelocity=(rb.linearVelocity.y * Vector2.up + movent * SpeedForce);    
+        Vector2 movent2 = movent;
+        movent2.y=0;
+        rb.linearVelocity=(rb.linearVelocity.y * Vector2.up + movent2 * SpeedForce);    
     }
     public void Damage()
     {

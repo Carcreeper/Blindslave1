@@ -12,14 +12,17 @@ public class Jump : MonoBehaviour
     public InputActionProperty jumpAction;
 
     private Rigidbody2D rb;
-    [SerializeField] private bool isGrounded;
+    public bool isGrounded;
     private bool canDoubleJump;
+
+   
+    private Movement movementScript;
 
     private void Awake()
     {
-
         jumpAction.action.Enable();
         rb = GetComponent<Rigidbody2D>();
+        movementScript = GetComponent<Movement>();
         jumpAction.action.performed += JumpMethod;
     }
 
@@ -28,52 +31,38 @@ public class Jump : MonoBehaviour
 
     }
 
-    
     void Update()
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, groundLayer);
 
-
-        if (isGrounded) 
-        { 
-        
+        if (isGrounded)
+        {
             canDoubleJump = true;
-            
-        
         }
-
-       
-
-
-
     }
-    //gizmovisual
 
     public void JumpMethod(InputAction.CallbackContext cnt)
     {
+      
+        if (movementScript != null && movementScript.IsCrouching())
+        {
+            return; 
+        }
 
         if (isGrounded)
         {
-
-            rb.linearVelocity = new Vector2(rb.linearVelocityX, jumpForce);
-
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
         }
-        else if (
-            
-            canDoubleJump && !isGrounded)
+        else if (canDoubleJump && !isGrounded)
         {
-
-            rb.linearVelocity = new Vector2(rb.linearVelocityX, doubleJumpForce);
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, doubleJumpForce);
             canDoubleJump = false;
-
         }
-
     }
-        
-    void OnDrawGizmos() { 
-        
+
+    void OnDrawGizmos()
+    {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(groundCheck.position, checkRadius);
-            
     }
 }

@@ -24,6 +24,8 @@ public class Health : MonoBehaviour
         {
             movement.Damage();
         }
+
+
     }
     public void Death ()
     {

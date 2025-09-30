@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    public Transform player;
+    private Transform player;
     public float detectionRadius = 5.0f;
     public float speed = 2.0f;
-
+    public float distanceStop;
     private Rigidbody2D rb;
     private Vector2 movement;
 
@@ -13,6 +13,7 @@ public class EnemyController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        player = GameManeger.singleton.player;
     }
 
     // Update is called once per frame
@@ -33,18 +34,14 @@ public class EnemyController : MonoBehaviour
             movement = Vector2.zero;
         }
 
+        if (distanceToPlayer < distanceStop )
+        {
+            movement = Vector2.zero;
+        }
+
         rb.MovePosition(rb.position + movement * speed * Time.deltaTime);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            Vector2 direccionDaño = new Vector2(transform.position.x, 5);
-            //collision.gameObject.GetComponent<Movement>().RecibeDaño(direccionDaño, 1);
-
-        }
-    }
 
     private void OnDrawGizmosSelected()
     {

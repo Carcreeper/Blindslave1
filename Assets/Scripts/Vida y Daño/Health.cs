@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Health : MonoBehaviour
 {
@@ -6,6 +7,7 @@ public class Health : MonoBehaviour
     public float maxHealth;
     public Movement movement;
     public bool isDeath;
+    public UnityEvent eventoMorir;
 
     [ContextMenu("Causar daño")]
     public void TestDamage()
@@ -14,10 +16,15 @@ public class Health : MonoBehaviour
     }
     public void TakeDamage(float c)
     {
+        if (isDeath)
+        {
+            return;
+        }
         health -= c;
         if (health <= 0)
         {
             Death();
+
         }
 
         if (movement != null)
@@ -29,7 +36,7 @@ public class Health : MonoBehaviour
     }
     public void Death ()
     {
- 
+        eventoMorir.Invoke();
         isDeath = true;
 
     }

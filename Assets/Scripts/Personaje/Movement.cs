@@ -6,30 +6,34 @@ using UnityEngine.Jobs;
 public class Movement : MonoBehaviour
 {
     [SerializeField] public float SpeedForce;
-    [SerializeField] public InputActionProperty crouchAction; // Nueva acción para agacharse
+    [SerializeField] public InputActionProperty crouchAction; 
 
     private Rigidbody2D rb;
     public Vector2 movent;
     public InputActionProperty inpM;
     public Transform graphics;
     public Jump jump;
+    public float dashForce;
+    public InputActionProperty inpD;
+    public bool isDashing;
+    public float timeDashing;
 
-    
     [SerializeField] private bool isCrouching = false;
     [SerializeField] private Collider2D playerCollider;
     [SerializeField] private Vector2 originalColliderSize;
     [SerializeField] private Vector2 originalColliderOffset;
-    [SerializeField] private Vector2 crouchColliderSize = new Vector2(1f, 0.5f); // Tamaño del collider al agacharse
-    [SerializeField] private Vector2 crouchColliderOffset = new Vector2(0f, -0.25f); // Offset del collider al agacharse
+    [SerializeField] private Vector2 crouchColliderSize = new Vector2(1f, 0.5f); 
+    [SerializeField] private Vector2 crouchColliderOffset = new Vector2(0f, -0.25f); 
 
     private void Awake()
     {
         inpM.action.Enable();
         crouchAction.action.Enable();
-
-        // Suscribirse a los eventos de agacharse
+        inpD.action.Enable();
+       
         crouchAction.action.started += StartCrouch;
         crouchAction.action.canceled += StopCrouch;
+        inpD.action.performed += Dash;
     }
 
     void Start()
@@ -37,7 +41,7 @@ public class Movement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         playerCollider = GetComponent<Collider2D>();
 
-        // Guardar el tamaño y offset original del collider
+        
         if (playerCollider != null)
         {
             if (playerCollider is BoxCollider2D boxCollider)
@@ -56,11 +60,11 @@ public class Movement : MonoBehaviour
     void Update()
     {
         movent = inpM.action.ReadValue<Vector2>();
-
-        // Solo permitir movimiento horizontal si no está agachado
+        
+        
         if (!isCrouching)
         {
-            // Voltear el sprite según la dirección
+            
             if (movent.x > 0)
             {
                 graphics.localScale = Vector3.one;
@@ -81,13 +85,25 @@ public class Movement : MonoBehaviour
             movent2.x *= 0.5f;
         }
 
-        // Si está agachado, no aplicar movimiento horizontal
+        
         if (isCrouching)
         {
             movent2.x = 0;
         }
 
-        rb.linearVelocity = (rb.linearVelocity.y * Vector2.up + movent2 * SpeedForce);
+        if (!isDashing)
+        {
+
+            rb.linearVelocity = (rb.linearVelocity.y * Vector2.up + movent2 * SpeedForce);
+
+        }
+        else 
+        {        
+            
+            rb.linearVelocity = graphics.localScale.x * Vector3.right * dashForce + rb.linearVelocity.y * Vector3.up;
+
+        }
+
     }
 
     private void StartCrouch(InputAction.CallbackContext context)
@@ -97,7 +113,7 @@ public class Movement : MonoBehaviour
             isCrouching = true;
             AdjustColliderForCrouch(true);
 
-            // Opcional: Ajustar la escala del sprite para mostrar visualmente que está agachado
+            
             if (graphics != null)
             {
                 graphics.localScale = new Vector3(graphics.localScale.x, 0.6f, graphics.localScale.z);
@@ -112,7 +128,7 @@ public class Movement : MonoBehaviour
             isCrouching = false;
             AdjustColliderForCrouch(false);
 
-            // Restaurar la escala original del sprite
+           
             if (graphics != null)
             {
                 float xScale = graphics.localScale.x;
@@ -160,7 +176,22 @@ public class Movement : MonoBehaviour
         Debug.Log("activó el daño en el movimiento");
     }
 
-    // Método público para verificar si el jugador está agachado (útil para otros scripts)
+
+    public void Dash(InputAction.CallbackContext c)
+    {
+        
+        isDashing = true;
+       
+        Invoke("UnableDash",timeDashing);
+        
+
+    }
+
+    public void UnableDash()
+    {
+        isDashing = false;
+    }
+
     public bool IsCrouching()
     {
         return isCrouching;
@@ -168,7 +199,7 @@ public class Movement : MonoBehaviour
 
     private void OnDestroy()
     {
-        // Desuscribirse de los eventos para evitar errores
+        
         if (crouchAction.action != null)
         {
             crouchAction.action.started -= StartCrouch;

@@ -8,6 +8,7 @@ public class EnemyController : MonoBehaviour
     public float distanceStop;
     private Rigidbody2D rb;
     private Vector2 movement;
+    public bool esVolador;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -26,7 +27,17 @@ public class EnemyController : MonoBehaviour
         {
             Vector2 direction = (player.position - transform.position).normalized;
 
-            movement = new Vector2(direction.x, direction.y);
+            movement = new Vector2(direction.x, esVolador?direction.y:0);
+            //ROTACION DEL ENEMIGO
+            if (direction.x > 0)
+            {
+               transform.localRotation = Quaternion.Euler (0, 180, 0);
+            }
+            else if (direction.x < 0) 
+            {
+               transform.localRotation = Quaternion.Euler(0, 0, 0);
+            }
+            //ROTACION DEL ENEMIGO
         }
 
         else 

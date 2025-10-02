@@ -14,16 +14,15 @@ public class EnemyAttack : MonoBehaviour
     {
         float distanceToPlayer = Vector2.Distance(transform.position, GameManeger.singleton.player.position);
 
-
         if (distanceToPlayer < attackRange)
         {
             if (distanceToPlayer < attackRange && !isEnemyAttacking)
             {
                 isEnemyAttacking = true;
                 StartCoroutine(AttackPlayer());
-                
             }
         }
+
     }
 
 

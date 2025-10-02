@@ -1730,6 +1730,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4846003274634963441, guid: 573c3793baa20cf45a761a2bea12fc92, type: 3}
+      propertyPath: dashForce
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4846003274634963441, guid: 573c3793baa20cf45a761a2bea12fc92, type: 3}
+      propertyPath: inpD.m_Action.m_Name
+      value: Inp D
+      objectReference: {fileID: 0}
     - target: {fileID: 5518377817945817240, guid: 573c3793baa20cf45a761a2bea12fc92, type: 3}
       propertyPath: m_Name
       value: Personaje

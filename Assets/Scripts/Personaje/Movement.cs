@@ -17,6 +17,7 @@ public class Movement : MonoBehaviour
     public InputActionProperty inpD;
     public bool isDashing;
     public float timeDashing;
+    public Health health;
 
     [SerializeField] private bool isCrouching = false;
     [SerializeField] private Collider2D playerCollider;
@@ -38,6 +39,7 @@ public class Movement : MonoBehaviour
 
     void Start()
     {
+
         rb = GetComponent<Rigidbody2D>();
         playerCollider = GetComponent<Collider2D>();
 
@@ -59,6 +61,7 @@ public class Movement : MonoBehaviour
 
     void Update()
     {
+        if (health != null && health.isDeath) return;
         movent = inpM.action.ReadValue<Vector2>();
         
         
@@ -78,6 +81,8 @@ public class Movement : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (health != null && health.isDeath) return;
+
         Vector2 movent2 = movent;
         movent2.y = 0;
         if (!jump.isGrounded)
@@ -108,6 +113,8 @@ public class Movement : MonoBehaviour
 
     private void StartCrouch(InputAction.CallbackContext context)
     {
+        if (health != null && health.isDeath) return;
+
         if (!isCrouching)
         {
             isCrouching = true;
@@ -123,6 +130,8 @@ public class Movement : MonoBehaviour
 
     private void StopCrouch(InputAction.CallbackContext context)
     {
+        if (health != null && health.isDeath) return;
+
         if (isCrouching)
         {
             isCrouching = false;
@@ -139,6 +148,8 @@ public class Movement : MonoBehaviour
 
     private void AdjustColliderForCrouch(bool crouch)
     {
+        if (health != null && health.isDeath) return;
+
         if (playerCollider == null) return;
 
         if (playerCollider is BoxCollider2D boxCollider)
@@ -206,4 +217,5 @@ public class Movement : MonoBehaviour
             crouchAction.action.canceled -= StopCrouch;
         }
     }
+
 }

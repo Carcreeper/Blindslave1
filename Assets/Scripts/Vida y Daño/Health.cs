@@ -24,7 +24,6 @@ public class Health : MonoBehaviour
         if (health <= 0)
         {
             Death();
-
         }
 
         if (movement != null)

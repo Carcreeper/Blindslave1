@@ -39,6 +39,10 @@ public class Movement : MonoBehaviour
 
     void Start()
     {
+        if (GameManager.Instance.TieneCheckpointGuardado())
+        {
+            transform.position = GameManager.Instance.CargarCheckpoint();
+        }
 
         rb = GetComponent<Rigidbody2D>();
         playerCollider = GetComponent<Collider2D>();

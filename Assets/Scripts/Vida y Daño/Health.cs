@@ -39,5 +39,7 @@ public class Health : MonoBehaviour
         eventoMorir.Invoke();
         isDeath = true;
 
+       
+
     }
 }

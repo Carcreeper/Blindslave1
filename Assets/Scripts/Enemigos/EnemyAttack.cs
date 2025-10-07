@@ -7,11 +7,14 @@ public class EnemyAttack : MonoBehaviour
     public float attackRange;
     public Transform attackPivotEnemy;
     private bool isEnemyAttacking;
+    public Health health;
  
 
 
     private void Update()
     {
+        if (health != null && health.isDeath) return;
+
         float distanceToPlayer = Vector2.Distance(transform.position, GameManeger.singleton.player.position);
 
         if (distanceToPlayer < attackRange)
@@ -28,8 +31,11 @@ public class EnemyAttack : MonoBehaviour
 
     private IEnumerator AttackPlayer()
     {
+       
+
         while (isEnemyAttacking)
         {
+
 
             yield return new WaitForSeconds(attackDelay);
 
@@ -39,7 +45,9 @@ public class EnemyAttack : MonoBehaviour
             yield return new WaitForSeconds(attackDelay);
             isEnemyAttacking = false;
 
+            if (health != null && health.isDeath) yield break;
         }
+      
 
     }
     private void OnDrawGizmosSelected()

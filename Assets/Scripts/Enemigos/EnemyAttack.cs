@@ -32,11 +32,8 @@ public class EnemyAttack : MonoBehaviour
     private IEnumerator AttackPlayer()
     {
        
-
         while (isEnemyAttacking)
         {
-
-
             yield return new WaitForSeconds(attackDelay);
 
             GameManeger.singleton.playerHealth.TakeDamage(attackForce);
@@ -47,8 +44,6 @@ public class EnemyAttack : MonoBehaviour
 
             if (health != null && health.isDeath) yield break;
         }
-      
-
     }
     private void OnDrawGizmosSelected()
 

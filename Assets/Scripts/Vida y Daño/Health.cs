@@ -41,5 +41,7 @@ public class Health : MonoBehaviour
 
         GameManager.Instance.RespawnearEnCheckpoint(gameObject);
 
+
+
     }
 }

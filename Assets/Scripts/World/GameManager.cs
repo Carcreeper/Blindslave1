@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
 
     private Vector3 ultimoCheckpoint;
     private bool hayCheckpointGuardado = false;
-
+    public Transform player;
     void Awake()
     {
         // Patrón Singleton

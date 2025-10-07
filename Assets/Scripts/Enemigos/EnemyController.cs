@@ -9,6 +9,7 @@ public class EnemyController : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 movement;
     public bool esVolador;
+    public Health health;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -20,6 +21,8 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (health != null && health.isDeath) return;
+
         float distanceToPlayer = Vector2.Distance(transform.position, player.position);
 
         if (distanceToPlayer < detectionRadius)
@@ -52,6 +55,8 @@ public class EnemyController : MonoBehaviour
 
         rb.MovePosition(rb.position + movement * speed * Time.deltaTime);
     }
+
+
 
 
     private void OnDrawGizmosSelected()

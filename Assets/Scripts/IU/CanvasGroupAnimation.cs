@@ -25,6 +25,9 @@ public class CanvasGroupUIAnimation : MonoBehaviour
             return;
         }
 
+        endPosition = new Vector2(rectTransform.anchoredPosition.x, rectTransform.anchoredPosition.y);
+
+
         // Inicializa al estado inicial
         rectTransform.anchoredPosition = startPosition;
         canvasGroup.alpha = 0f;

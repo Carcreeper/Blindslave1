@@ -10,6 +10,7 @@ public class EnemyController : MonoBehaviour
     private Vector2 movement;
     public bool esVolador;
     public Health health;
+    public Collider2D collider;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -54,6 +55,18 @@ public class EnemyController : MonoBehaviour
         }
 
         rb.MovePosition(rb.position + movement * speed * Time.deltaTime);
+    }  
+
+    public void Morir()
+    {
+        if (collider!= null)
+        {
+            collider.enabled = false;
+
+        }
+
+        Destroy(rb);
+        this.enabled = false;
     }
 
 

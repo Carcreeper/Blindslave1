@@ -8,7 +8,7 @@ public class EnemyAttack : MonoBehaviour
     public Transform attackPivotEnemy;
     private bool isEnemyAttacking;
     public Health health;
- 
+    public Animator animator;
 
 
     private void Update()
@@ -28,17 +28,17 @@ public class EnemyAttack : MonoBehaviour
 
     }
 
-
+    public void Atacar()
+    {
+        GameManeger.singleton.playerHealth.TakeDamage(attackForce);
+    }
     private IEnumerator AttackPlayer()
     {
        
         while (isEnemyAttacking)
         {
+            animator.SetBool("Atacando", true);
             yield return new WaitForSeconds(attackDelay);
-
-            GameManeger.singleton.playerHealth.TakeDamage(attackForce);
-
-
             yield return new WaitForSeconds(attackDelay);
             isEnemyAttacking = false;
 

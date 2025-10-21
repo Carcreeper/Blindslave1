@@ -11,6 +11,7 @@ public class EnemyController : MonoBehaviour
     public bool esVolador;
     public Health health;
     public Collider2D collider;
+    public Animator animator;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -29,6 +30,7 @@ public class EnemyController : MonoBehaviour
         if (distanceToPlayer < detectionRadius)
 
         {
+            animator.SetBool("Caminando", true);
             Vector2 direction = (player.position - transform.position).normalized;
 
             movement = new Vector2(direction.x, esVolador?direction.y:0);
@@ -46,6 +48,7 @@ public class EnemyController : MonoBehaviour
 
         else 
         {
+            animator.SetBool("Caminando", false);
             movement = Vector2.zero;
         }
 
@@ -59,6 +62,7 @@ public class EnemyController : MonoBehaviour
 
     public void Morir()
     {
+        animator.SetBool("Muriendo", true);
         if (collider!= null)
         {
             collider.enabled = false;
@@ -68,7 +72,6 @@ public class EnemyController : MonoBehaviour
         Destroy(rb);
         this.enabled = false;
     }
-
 
 
 

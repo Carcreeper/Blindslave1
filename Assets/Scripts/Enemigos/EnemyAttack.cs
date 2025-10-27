@@ -8,14 +8,14 @@ public class EnemyAttack : MonoBehaviour
     public Transform attackPivotEnemy;
     private bool isEnemyAttacking;
     public Health health;
- 
+    public Animator animator;
 
 
     private void Update()
     {
         if (health != null && health.isDeath) return;
 
-        float distanceToPlayer = Vector2.Distance(transform.position, GameManeger.singleton.player.position);
+        float distanceToPlayer = Vector2.Distance(transform.position, GameManager.singleton.player.position);
 
         if (distanceToPlayer < attackRange)
         {
@@ -28,17 +28,17 @@ public class EnemyAttack : MonoBehaviour
 
     }
 
-
+    public void Atacar()
+    {
+        GameManager.singleton.playerHealth.TakeDamage(attackForce);
+    }
     private IEnumerator AttackPlayer()
     {
        
         while (isEnemyAttacking)
         {
+            animator.SetBool("Atacando", true);
             yield return new WaitForSeconds(attackDelay);
-
-            GameManeger.singleton.playerHealth.TakeDamage(attackForce);
-
-
             yield return new WaitForSeconds(attackDelay);
             isEnemyAttacking = false;
 

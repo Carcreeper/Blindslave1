@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
+using System.Collections;
 
 public class Health : MonoBehaviour
 {
@@ -8,8 +9,10 @@ public class Health : MonoBehaviour
     public Movement movement;
     public bool isDeath;
     public UnityEvent eventoMorir;
+    public float tiempoEsperar = 3f;
+    public bool isPlayer ;
 
-    [ContextMenu("Causar daño")]
+    [ContextMenu("Causar daï¿½o")]
     public void TestDamage()
     {
         TakeDamage(1);
@@ -37,9 +40,27 @@ public class Health : MonoBehaviour
     {
         eventoMorir.Invoke();
         isDeath = true;
+        if (!isPlayer)
+        {
+            if (movement != null)
+            {
+                movement.enabled = false;
+            }
 
+            StartCoroutine(EsperarYDesaparecer());
+        }
+        else 
+        { 
 
-        GameManager.Instance.RespawnearEnCheckpoint(gameObject);
+            GameManager.Instance.RespawnearEnCheckpoint(gameObject);
 
+        }
+
+    }
+
+    private IEnumerator EsperarYDesaparecer()
+    {
+        yield return new WaitForSeconds(tiempoEsperar);
+        gameObject.SetActive(false); 
     }
 }

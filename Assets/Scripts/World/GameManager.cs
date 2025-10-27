@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -6,7 +7,9 @@ public class GameManager : MonoBehaviour
 
     private Vector3 ultimoCheckpoint;
     private bool hayCheckpointGuardado = false;
-
+    public static GameManager singleton;
+    public Transform player;
+    public Health playerHealth;
     void Awake()
     {
         // Patrón Singleton
@@ -18,6 +21,16 @@ public class GameManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
+        }
+
+        if (singleton == null)
+        {
+            singleton = this;
+        }
+
+        else
+        {
+            DestroyImmediate(gameObject);
         }
     }
 

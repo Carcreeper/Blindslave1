@@ -33,7 +33,8 @@ public class EnemyController : MonoBehaviour
             animator.SetBool("Caminando", true);
             Vector2 direction = (player.position - transform.position).normalized;
 
-            movement = new Vector2(direction.x, esVolador?direction.y:0);
+            movement = new Vector2(direction.x, esVolador ? direction.y : rb.linearVelocity.y);
+
             //ROTACION DEL ENEMIGO
             if (direction.x > 0)
             {
@@ -49,12 +50,12 @@ public class EnemyController : MonoBehaviour
         else 
         {
             animator.SetBool("Caminando", false);
-            movement = Vector2.zero;
+            movement = new Vector2(0, rb.linearVelocity.y);
         }
 
         if (distanceToPlayer < distanceStop )
         {
-            movement = Vector2.zero;
+            rb.MovePosition(new Vector2(rb.position.x + movement.x * speed * Time.deltaTime, rb.position.y));
         }
 
         rb.MovePosition(rb.position + movement * speed * Time.deltaTime);

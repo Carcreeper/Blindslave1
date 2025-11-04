@@ -479,10 +479,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 100000
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 5
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -528,7 +528,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.14318681, y: 0.42255354}
+  m_Offset: {x: 0.14318681, y: 0.49929225}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -538,7 +538,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.6550479, y: 1.8532739}
+  m_Size: {x: 0.6550479, y: 1.6997964}
   m_EdgeRadius: 0
 --- !u!114 &8114932446568964866
 MonoBehaviour:
@@ -583,7 +583,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-  tiempoEsperar: 3
+  tiempoEsperar: 8
   isPlayer: 0
 --- !u!1 &3757245719500062784
 GameObject:
@@ -611,7 +611,7 @@ Transform:
   m_GameObject: {fileID: 3757245719500062784}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.302, y: 0.604, z: 0}
+  m_LocalPosition: {x: -0.86, y: 0.604, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

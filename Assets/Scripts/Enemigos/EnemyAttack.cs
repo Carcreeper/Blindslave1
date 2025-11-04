@@ -44,6 +44,7 @@ public class EnemyAttack : MonoBehaviour
 
             if (health != null && health.isDeath) yield break;
         }
+        animator.SetBool("Atacando", false);
     }
     private void OnDrawGizmosSelected()
 

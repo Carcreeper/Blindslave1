@@ -84,4 +84,11 @@ public class GameManager : MonoBehaviour
             Debug.LogWarning("No hay checkpoint guardado");
         }
     }
+    [ContextMenu("borrar datos :)")]
+    public void BorrarDatos()
+    {
+        PlayerPrefs.DeleteKey("CheckpointX");
+        PlayerPrefs.DeleteKey("CheckpointY");
+        PlayerPrefs.DeleteKey("CheckpointZ");
+    }
 }

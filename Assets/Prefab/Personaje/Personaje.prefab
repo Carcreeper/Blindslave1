@@ -505,6 +505,7 @@ MonoBehaviour:
       m_SingletonActionBindings: []
       m_Flags: 0
     m_Reference: {fileID: 7040659881675835329, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  animator: {fileID: 0}
   movent: {x: 0, y: 0}
   inpM:
     m_UseReference: 1
@@ -543,6 +544,7 @@ MonoBehaviour:
     m_Reference: {fileID: -7471211009204490832, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   isDashing: 0
   timeDashing: 0.5
+  health: {fileID: 0}
   isCrouching: 0
   playerCollider: {fileID: 0}
   originalColliderSize: {x: 0, y: 0}
@@ -580,6 +582,7 @@ MonoBehaviour:
       m_SingletonActionBindings: []
       m_Flags: 0
     m_Reference: {fileID: -2099379676528639254, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  health: {fileID: 0}
   isGrounded: 0
 --- !u!114 &2154146450247863522
 MonoBehaviour:
@@ -597,6 +600,11 @@ MonoBehaviour:
   maxHealth: 10
   movement: {fileID: 4846003274634963441}
   isDeath: 0
+  eventoMorir:
+    m_PersistentCalls:
+      m_Calls: []
+  tiempoEsperar: 3
+  isPlayer: 0
 --- !u!114 &8443500497733760207
 MonoBehaviour:
   m_ObjectHideFlags: 0

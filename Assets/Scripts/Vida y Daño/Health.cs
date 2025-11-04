@@ -10,8 +10,9 @@ public class Health : MonoBehaviour
     public bool isDeath;
     public UnityEvent eventoMorir;
     public float tiempoEsperar = 3f;
+    public bool isPlayer ;
 
-    [ContextMenu("Causar daño")]
+    [ContextMenu("Causar daï¿½o")]
     public void TestDamage()
     {
         TakeDamage(1);
@@ -39,19 +40,26 @@ public class Health : MonoBehaviour
     {
         eventoMorir.Invoke();
         isDeath = true;
-
-        if (movement != null)
+        if (!isPlayer)
         {
-            movement.enabled = false;  
-        }
+            if (movement != null)
+            {
+                movement.enabled = false;
+            }
 
-        StartCoroutine(EsperarYDesaparecer());
+            StartCoroutine(EsperarYDesaparecer());
+        }
+        else 
+        { 
+
+            GameManager.Instance.RespawnearEnCheckpoint(gameObject);
+
+        }
 
     }
 
     private IEnumerator EsperarYDesaparecer()
     {
-
         yield return new WaitForSeconds(tiempoEsperar);
         gameObject.SetActive(false); 
     }

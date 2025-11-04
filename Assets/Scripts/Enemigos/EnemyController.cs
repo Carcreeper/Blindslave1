@@ -17,7 +17,7 @@ public class EnemyController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        player = GameManeger.singleton.player;
+        player = GameManager.singleton.player;
     }
 
     // Update is called once per frame

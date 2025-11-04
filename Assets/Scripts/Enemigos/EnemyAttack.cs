@@ -15,7 +15,7 @@ public class EnemyAttack : MonoBehaviour
     {
         if (health != null && health.isDeath) return;
 
-        float distanceToPlayer = Vector2.Distance(transform.position, GameManeger.singleton.player.position);
+        float distanceToPlayer = Vector2.Distance(transform.position, GameManager.singleton.player.position);
 
         if (distanceToPlayer < attackRange)
         {
@@ -30,7 +30,7 @@ public class EnemyAttack : MonoBehaviour
 
     public void Atacar()
     {
-        GameManeger.singleton.playerHealth.TakeDamage(attackForce);
+        GameManager.singleton.playerHealth.TakeDamage(attackForce);
     }
     private IEnumerator AttackPlayer()
     {

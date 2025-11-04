@@ -11,6 +11,7 @@ public class Jump : MonoBehaviour
     [SerializeField] float checkRadius;
     public InputActionProperty jumpAction;
 
+    public Health health;
     private Rigidbody2D rb;
     public bool isGrounded;
     private bool canDoubleJump;
@@ -33,6 +34,8 @@ public class Jump : MonoBehaviour
 
     void Update()
     {
+        if (health != null && health.isDeath) return;
+
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, groundLayer);
 
         if (isGrounded)
@@ -43,7 +46,8 @@ public class Jump : MonoBehaviour
 
     public void JumpMethod(InputAction.CallbackContext cnt)
     {
-      
+        if (health != null && health.isDeath) return;
+
         if (movementScript != null && movementScript.IsCrouching())
         {
             return; 

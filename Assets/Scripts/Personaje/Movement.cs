@@ -7,7 +7,7 @@ public class Movement : MonoBehaviour
 {
     [SerializeField] public float SpeedForce;
     [SerializeField] public InputActionProperty crouchAction; 
-
+    public Animator animator;
     private Rigidbody2D rb;
     public Vector2 movent;
     public InputActionProperty inpM;
@@ -18,6 +18,7 @@ public class Movement : MonoBehaviour
     public bool isDashing;
     public float timeDashing;
     public Health health;
+    
 
     [SerializeField] private bool isCrouching = false;
     [SerializeField] private Collider2D playerCollider;
@@ -39,6 +40,10 @@ public class Movement : MonoBehaviour
 
     void Start()
     {
+        if (GameManager.Instance.TieneCheckpointGuardado())
+        {
+            transform.position = GameManager.Instance.CargarCheckpoint();
+        }
 
         rb = GetComponent<Rigidbody2D>();
         playerCollider = GetComponent<Collider2D>();
@@ -63,6 +68,8 @@ public class Movement : MonoBehaviour
     {
         if (health != null && health.isDeath) return;
         movent = inpM.action.ReadValue<Vector2>();
+
+        animator.SetBool("walking",movent.magnitude>0.1f && jump.isGrounded);
         
         
         if (!isCrouching)

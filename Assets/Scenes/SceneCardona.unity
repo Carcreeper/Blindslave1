@@ -1710,7 +1710,7 @@ Transform:
   m_GameObject: {fileID: 1181199102}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.302, y: 0.604, z: 0}
+  m_LocalPosition: {x: 0.148, y: 0.411, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1730,7 +1730,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackForce: 2
   attackDelay: 1
-  attackRange: 0.8
+  attackRange: 1
   attackPivotEnemy: {fileID: 1181199103}
   health: {fileID: 1134725962}
   animator: {fileID: 413917916}
